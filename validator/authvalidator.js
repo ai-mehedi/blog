@@ -24,4 +24,5 @@ let signupvalidator = [
 ]
 
 
+
 module.exports = signupvalidator

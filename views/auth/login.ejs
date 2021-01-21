@@ -25,8 +25,11 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		<div class="main-agileinfo">
 			<div class="agileits-top">
 				<form action="/auth/login" method="post">
-					<input class="text email" type="email" name="lemail" placeholder="Email" required="">
-					<input class="text" type="password" name="lpassword" placeholder="Password" required="">
+          <input class="text email" type="email" name="lemail" placeholder="Email" >
+          <p><%= error.lemail && error.lemail %></p>
+
+          <input class="text" type="password" name="lpassword" placeholder="Password" >
+           <p><%= error.lpassword && error.lpassword %></p>
 					<div class="wthree-text">
 						<label class="anim">
 							<input type="checkbox" class="checkbox" required="">

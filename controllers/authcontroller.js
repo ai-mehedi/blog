@@ -69,15 +69,30 @@ exports.signuppost = async (req, res, next) => {
 
 exports.loginget = (req, res, next) => {
 
+    console.log(req.session.isLoggedin, req.session._user)
 
-
-    res.render('./auth/login');
+    res.render('./auth/login', { error: {} });
 }
 
 
 
 exports.loginpost = async (req, res, next) => {
     const { lemail, lpassword } = req.body
+
+    errorformatter = (error) => error.msg
+    let errors = validationResult(req).formatWith(errorformatter)
+
+    if (!errors.isEmpty()) {
+        return res.render('./auth/login',
+            {
+                error: errors.mapped(),
+
+            });
+    }
+
+
+
+
     try {
 
 
@@ -103,8 +118,9 @@ exports.loginpost = async (req, res, next) => {
 
 
             })
-
-        console.log('login Success',);
+        req.session.isLoggedin = true
+        req.session.User = luser
+        res.render('./auth/login', { error: {} });
 
 
     } catch (e) {
